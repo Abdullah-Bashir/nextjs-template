@@ -16,6 +16,7 @@ export const authApi = createApi({
     }),
 
     endpoints: (builder) => ({
+
         // 1️⃣ Register User
         registerUser: builder.mutation({
             query: (userData) => ({
@@ -24,6 +25,7 @@ export const authApi = createApi({
                 body: userData,
             }),
         }),
+
         // 2️⃣ Verify OTP / Account Verification
         verifyOtp: builder.mutation({
             query: ({ email, verificationCode }) => ({
@@ -32,6 +34,7 @@ export const authApi = createApi({
                 body: { email, verificationCode },
             }),
         }),
+
         // 3️⃣ Login User
         loginUser: builder.mutation({
             query: (credentials) => ({
@@ -40,6 +43,7 @@ export const authApi = createApi({
                 body: credentials,
             }),
         }),
+
         // 4️⃣ Resend OTP
         resendOtp: builder.mutation({
             query: ({ email }) => ({
@@ -48,6 +52,7 @@ export const authApi = createApi({
                 body: { email },
             }),
         }),
+        
         // 5️⃣ Validate Token
         validateToken: builder.query({
             query: () => ({

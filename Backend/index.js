@@ -5,7 +5,6 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/user.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 dotenv.config();
@@ -55,7 +54,6 @@ app.get("/", (req, res) => {
 
 // API routes
 app.use("/api/auth", authRoutes);
-app.use("/api/users", userRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

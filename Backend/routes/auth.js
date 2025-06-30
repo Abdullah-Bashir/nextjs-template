@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 import { authMiddleware } from "../middleware/auth.js";
 import validator from "validator"
 
-dotenv.config(); // Load environment variables
+dotenv.config(); // Load environment variable
 
 const router = express.Router();
 
@@ -53,13 +53,10 @@ const sendEmail = async (to, subject, html) => {
     }
 };
 
-
-
 // Helper function to generate JWT token
 const generateToken = (user) => {
     return jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "3h" });
 };
-
 
 // Register route
 router.post("/register", async (req, res) => {
@@ -91,6 +88,7 @@ router.post("/register", async (req, res) => {
             email,
             createdAt: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) },
         });
+
         if (registrationAttempts >= 100) {
             return res.status(400).json({ message: "Maximum registration attempts reached. Please try again later." });
         }
@@ -199,6 +197,7 @@ router.post("/login", async (req, res, next) => {
         }
 
         const user = await User.findOne({ email });
+
         if (!user) {
             return res.status(401).json({ message: "Invalid credentials" });
         }
@@ -281,9 +280,6 @@ router.post('/resend-otp', async (req, res, next) => {
         next(error);
     }
 });
-
-
-
 
 // Forgot password route
 router.post("/forgot-password", async (req, res) => {
@@ -392,13 +388,9 @@ router.put("/reset-password/:token", async (req, res) => {
         // Send success response
         res.json({ message: "Password reset successfully" });
     } catch (error) {
-
         res.status(500).json({ message: error.message || "An error occurred. Please try again." });
     }
 });
-
-
-
 
 router.get('/validate-token', authMiddleware, (req, res) => {
     res.json({
