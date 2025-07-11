@@ -1,7 +1,7 @@
 import ReduxProvider from "./redux-provider";
-import SessionProviderWrapper from "./components/SessionProviderWrapper";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "./components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Book Mart",
-  description: "Library system where you can find any book you want.",
+  title: "Snapofolio",
+  description: "Built free portfolios. Your online identity",
 };
 
 export default function RootLayout({ children }) {
@@ -35,10 +35,12 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <SessionProviderWrapper>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider>
           <ReduxProvider>{children}</ReduxProvider>
-        </SessionProviderWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );
